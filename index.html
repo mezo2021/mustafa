@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>🎯 امتحان الجهاز المركزي للرقابة المالية - النسخة الاحترافية v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #0f172a;
+    --primary-accent: #1e3a8a;
+    --secondary: #0284c7;
+    --accent: #f59e0b;
+    --accent-2: #f97316;
+    --bg-color: #f1f5f9;
+    --bg-alt: #e2e8f0;
+    --card-bg: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --syria-green: #007a3d;
+    --syria-red: #d52b1e;
+    --syria-black: #000000;
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --warning: #f59e0b;
+    --border: #cbd5e1;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    --gradient-1: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+    --gradient-2: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    --gradient-3: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-danger: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+}
+
+[data-theme="dark"] {
+    --primary: #f8fafc;
+    --primary-accent: #3b82f6;
+    --bg-color: #0f172a;
+    --bg-alt: #1e293b;
+    --card-bg: #1e293b;
+    --text-dark: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 15px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg-color);
+    color: var(--text-dark);
+    padding-top: 95px;
+    padding-bottom: 90px;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+/* ============ TOP HEADER ============ */
+.top-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 85px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    z-index: 1000;
+    border-bottom: 3px solid var(--accent);
+    gap: 10px;
+}
+
+.designer-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid rgba(245,158,11,0.4);
+    transition: all 0.3s;
+}
+
+.designer-badge:hover {
+    background: rgba(245,158,11,0.15);
+    transform: scale(1.02);
+}
+
+.designer-badge .icon {
+    font-size: 1.4rem;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.designer-title {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    line-height: 1;
+}
+
+.designer-name {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fbbf24;
+    letter-spacing: 0.5px;
+}
+
+.exam-title-head {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    text-align: center;
+    flex: 1;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timer-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #020617;
+    border: 2px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 14px;
+    box-shadow: 0 0 15px rgba(245,158,11,0.3);
+    transition: all 0.3s;
+}
+
+.timer-card.warning {
+    border-color: #f59e0b;
+    box-shadow: 0 0 20px rgba(245,158,11,0.6);
+    animation: pulseWarn 1s infinite;
+}
+
+.timer-card.danger {
+    border-color: #ef4444;
+    box-shadow: 0 0 25px rgba(239,68,68,0.7);
+    animation: pulseWarn 0.6s infinite;
+}
+
+@keyframes pulseWarn {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.timer-icon {
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+.timer-display {
+    font-size: 1.3rem;
+    font-weight: 900;
+    font-family: 'Cairo', monospace;
+    color: #fff;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.icon-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    transition: all 0.3s;
+}
+
+.icon-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.08) rotate(15deg);
+}
+
+/* ============ PROGRESS BAR ============ */
+.progress-bar-top {
+    position: fixed;
+    top: 85px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: rgba(0,0,0,0.1);
+    z-index: 999;
+    overflow: hidden;
+}
+
+.progress-bar-top-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10b981, #0284c7, #f59e0b);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ============ CONTAINER ============ */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ============ SYRIAN FLAG ============ */
+.syrian-flag-card {
+    width: 100%;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+}
+
+.flag-stripe { flex: 1; width: 100%; }
+.flag-green { background-color: var(--syria-green); }
+.flag-white { background-color: #fff; display: flex; align-items: center; justify-content: center; gap: 35px; }
+.flag-black { background-color: var(--syria-black); }
+.star { color: var(--syria-red); font-size: 1.6rem; line-height: 0; user-select: none; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ PASSWORD SCREEN ============ */
+.password-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 35px 30px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    border: 1px solid var(--border);
+    max-width: 480px;
+    margin: 20px auto;
+    animation: fadeInUp 0.6s ease;
+}
+
+.password-card h2 {
+    font-size: 1.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.password-card p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.password-card input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    font-size: 1.3rem;
+    text-align: center;
+    outline: none;
+    margin-bottom: 15px;
+    letter-spacing: 4px;
+    background: var(--bg-color);
+    color: var(--text-dark);
+    transition: all 0.3s;
+}
+
+.password-card input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 4px rgba(30,58,138,0.15);
+    transform: scale(1.02);
+}
+
+.pass-error {
+    color: var(--danger);
+    font-weight: 700;
+    margin-top: 12px;
+    display: none;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+/* ============ STATS PANEL ============ */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+    animation: fadeInUp 0.5s ease;
+}
+
+.stat-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gradient-1);
+}
+
+.stat-box:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-box .stat-icon {
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+}
+
+.stat-box .stat-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary-accent);
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-box .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.stat-box.streak .stat-value { color: #f59e0b; }
+.stat-box.streak::before { background: var(--gradient-2); }
+.stat-box.accuracy .stat-value { color: #10b981; }
+.stat-box.accuracy::before { background: var(--gradient-3); }
+
+/* ============ QUIZ CARD ============ */
+#quiz-container { display: none; }
+
+.quiz-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease;
+}
+
+.quiz-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(30,58,138,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.question-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.question-number {
+    background: var(--gradient-1);
+    color: #fff;
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(30,58,138,0.3);
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.8;
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ============ OPTIONS ============ */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    background: var(--card-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-item::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--gradient-1);
+    transition: width 0.3s;
+}
+
+.option-item:hover {
+    border-color: var(--secondary);
+    background: rgba(2,132,199,0.05);
+    transform: translateX(-4px);
+}
+
+.option-item.selected {
+    border-color: var(--primary-accent);
+    background: rgba(30,58,138,0.08);
+    box-shadow: 0 0 0 3px rgba(30,58,138,0.12);
+}
+
+.option-item.selected::before { width: 5px; }
+
+.option-prefix {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-left: 15px;
+    transition: all 0.25s;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.option-item.selected .option-prefix {
+    background: var(--gradient-1);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.option-label {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* ============ CONTROLS ============ */
+.controls-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 15px 20px;
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    gap: 10px;
+    flex-wrap: wrap;
+    position: sticky;
+    bottom: 75px;
+    z-index: 100;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+    background: var(--gradient-1);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(30,58,138,0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30,58,138,0.4);
+}
+
+.btn-secondary {
+    background: var(--bg-alt);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--border);
+    transform: translateY(-2px);
+}
+
+.btn-submit {
+    background: var(--gradient-3);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16,185,129,0.4);
+}
+
+/* ============ NAV GRID ============ */
+.nav-grid-section {
+    margin-top: 20px;
+    background: var(--card-bg);
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    animation: fadeInUp 0.6s ease;
+}
+
+.nav-grid-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 7px;
+}
+
+.nav-grid-item {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-dark);
+    position: relative;
+}
+
+.nav-grid-item:hover {
+    border-color: var(--primary-accent);
+    transform: scale(1.08);
+}
+
+.nav-grid-item.answered {
+    background: var(--gradient-1);
+    color: #fff;
+    border-color: transparent;
+}
+
+.nav-grid-item.active {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.25);
+    font-weight: 900;
+    transform: scale(1.1);
+}
+
+/* ============ RESULT VIEW ============ */
+.result-view {
+    display: none;
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 35px 25px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    animation: fadeInUp 0.6s ease;
+}
+
+.result-header {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary-accent);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.result-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.score-ring-container {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.score-ring {
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.score-ring svg { transform: rotate(-90deg); }
+
+.score-ring-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.score-ring-text .percent {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary-accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.score-ring-text .fraction {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.result-status {
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 12px 30px;
+    border-radius: 30px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 350px;
+}
+
+.status-pass {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border: 2px solid #10b981;
+    box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+    animation: celebrate 0.6s;
+}
+
+.status-fail {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    border: 2px solid #ef4444;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.result-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.detail-card {
+    background: var(--bg-alt);
+    border-radius: 14px;
+    padding: 15px 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.detail-card .value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.detail-card .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.detail-card.correct .value { color: var(--success); }
+.detail-card.wrong .value { color: var(--danger); }
+.detail-card.time .value { color: var(--secondary); }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+/* ============ REVIEW LIST ============ */
+.review-list {
+    text-align: right;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.review-item {
+    background: var(--bg-alt);
+    padding: 18px;
+    border-radius: 14px;
+    border-right: 5px solid var(--border);
+    transition: all 0.25s;
+}
+
+.review-item:hover {
+    transform: translateX(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.review-item.correct { border-right-color: var(--success); }
+.review-item.wrong { border-right-color: var(--danger); }
+
+.review-item .review-q {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.review-item .review-a {
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-bottom: 4px;
+}
+
+.review-item .correct-ans {
+    color: var(--primary-accent);
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: rgba(30,58,138,0.08);
+    border-radius: 6px;
+}
+
+/* ============ FLOATING FOOTER ============ */
+.persistent-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-top: 3px solid var(--accent);
+    z-index: 500;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+}
+
+.persistent-footer .name {
+    color: #fbbf24;
+    font-weight: 900;
+}
+
+/* ============ TOAST ============ */
+.toast-container {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    padding: 12px 22px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 0.92rem;
+    animation: toastIn 0.4s cubic-bezier(0.68,-0.55,0.27,1.55);
+    max-width: 90vw;
+    text-align: center;
+}
+
+.toast.success { border-color: var(--success); color: var(--success); }
+.toast.error { border-color: var(--danger); color: var(--danger); }
+.toast.info { border-color: var(--secondary); color: var(--secondary); }
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.8); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============ CONFETTI ============ */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #f59e0b;
+    top: -10px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ============ MODAL ============ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 4000;
+    padding: 20px;
+}
+
+.modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlide 0.3s;
+    text-align: center;
+}
+
+@keyframes modalSlide {
+    from { transform: scale(0.85) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal h3 {
+    color: var(--primary-accent);
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.modal p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-actions .btn { flex: 1; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    body { padding-top: 90px; padding-bottom: 80px; }
+    .top-header { padding: 0 12px; height: 78px; gap: 6px; }
+    .progress-bar-top { top: 78px; }
+    .exam-title-head { display: none; }
+    .designer-title { font-size: 0.6rem; }
+    .designer-name { font-size: 0.85rem; }
+    .designer-badge { padding: 5px 10px; }
+    .timer-card { padding: 5px 10px; }
+    .timer-display { font-size: 1.1rem; }
+    .timer-icon { font-size: 1rem; }
+    .icon-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+    .quiz-card { padding: 20px; border-radius: 20px; }
+    .question-text { font-size: 1.05rem; }
+    .option-item { padding: 13px 15px; }
+    .option-label { font-size: 0.94rem; }
+    .controls-card { padding: 12px; border-radius: 14px; }
+    .btn { padding: 10px 16px; font-size: 0.85rem; }
+    .stats-panel { grid-template-columns: repeat(2, 1fr); }
+    .result-details { grid-template-columns: repeat(2, 1fr); }
+    .score-ring { width: 170px; height: 170px; }
+    .score-ring-text .percent { font-size: 2.3rem; }
+    .result-header { font-size: 1.5rem; }
+}
+
+@media (max-width: 380px) {
+    .btn { padding: 9px 12px; font-size: 0.8rem; }
+    .nav-grid { grid-template-columns: repeat(auto-fill, minmax(35px, 1fr)); }
+    .nav-grid-item { height: 35px; font-size: 0.75rem; }
+}
+
+@media print {
+    .top-header, .controls-card, .nav-grid-section, .persistent-footer,
+    .action-buttons, .progress-bar-top, .stats-panel, #quiz-container, .modal-overlay { display: none !important; }
+    body { padding: 0; background: white; }
+    .result-view { display: block !important; box-shadow: none; padding: 0; }
+    .review-item { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP HEADER ============ -->
+<header class="top-header">
+    <div class="designer-badge">
+        <span class="icon">🎓</span>
+        <div>
+            <div class="designer-title">مصمم وإعداد</div>
+            <div class="designer-name">مصطفى علي اكر</div>
+        </div>
+    </div>
+
+    <div class="exam-title-head">📜 اختبار قانون الجهاز المركزي للرقابة المالية v1.0</div>
+
+    <div class="header-actions">
+        <div class="timer-card" id="timer-card">
+            <span class="timer-icon">⏳</span>
+            <span class="timer-display" id="timer">48:00</span>
+        </div>
+        <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="تبديل الوضع">🌙</button>
+    </div>
+</header>
+
+<!-- ============ PROGRESS BAR TOP ============ -->
+<div class="progress-bar-top">
+    <div class="progress-bar-top-fill" id="progress-top"></div>
+</div>
+
+<div class="container">
+
+    <!-- ============ PASSWORD SCREEN ============ -->
+    <div class="password-card" id="password-screen">
+        <div class="syrian-flag-card">
+            <div class="flag-stripe flag-green"></div>
+            <div class="flag-stripe flag-white">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+            </div>
+            <div class="flag-stripe flag-black"></div>
+        </div>
+
+        <h2>🔒 تسجيل الدخول للامتحان</h2>
+        <p>يرجى إدخال كلمة السر المعتمدة للبدء بالاختبار</p>
+        <input type="password" id="pass-input" placeholder="أدخل كلمة السر" 
+               onkeypress="if(event.key==='Enter') checkPassword()" autocomplete="off">
+        <button class="btn btn-primary" style="width:100%" onclick="checkPassword()">
+            🚀 دخول الاختبار
+        </button>
+        <div class="pass-error" id="pass-error">⚠️ كلمة السر غير صحيحة، يرجى المحاولة مجدداً!</div>
+    </div>
+
+    <!-- ============ QUIZ CONTAINER ============ -->
+    <div id="quiz-container">
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-box">
+                <div class="stat-icon">📝</div>
+                <div class="stat-value" id="stat-answered">0</div>
+                <div class="stat-label">تمت الإجابة</div>
+            </div>
+            <div class="stat-box accuracy">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value" id="stat-accuracy">0%</div>
+                <div class="stat-label">دقة الأداء</div>
+            </div>
+            <div class="stat-box streak">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-value" id="stat-streak">0</div>
+                <div class="stat-label">تتابع صحيح</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value" id="stat-xp">0</div>
+                <div class="stat-label">نقاط XP</div>
+            </div>
+        </div>
+
+        <!-- Quiz Card -->
+        <div class="quiz-card">
+            <div class="question-header">
+                <span class="question-number" id="q-number">سؤال 1</span>
+                <div class="question-text" id="q-text">جاري تحميل السؤال...</div>
+            </div>
+
+            <div class="options-list" id="options-container">
+                <!-- Options injected via JS -->
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-card">
+            <button class="btn btn-secondary" id="btn-prev" onclick="prevQuestion()" disabled>⬅️ السابق</button>
+            <button class="btn btn-submit" onclick="confirmSubmit()">✅ إنهاء وتصحيح</button>
+            <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">التالي ➡️</button>
+        </div>
+
+        <!-- Navigator Grid -->
+        <div class="nav-grid-section">
+            <div class="nav-grid-title">
+                <span>🗺️</span>
+                <span>خريطة الأسئلة - انقر للتنقل المباشر</span>
+            </div>
+            <div class="nav-grid" id="nav-grid"></div>
+        </div>
+
+    </div>
+
+    <!-- ============ RESULT VIEW ============ -->
+    <div class="result-view" id="result-view">
+        <div class="result-header">🎯 نتيجة الاختبار النهائية</div>
+        <div class="result-subtitle">قانون الجهاز المركزي للرقابة المالية - المرسوم التشريعي 64 لعام 2003</div>
+
+        <div class="score-ring-container">
+            <div class="score-ring">
+                <svg width="200" height="200">
+                    <circle cx="100" cy="100" r="88" fill="none" stroke="var(--bg-alt)" stroke-width="12"/>
+                    <circle cx="100" cy="100" r="88" fill="none" 
+                            stroke="url(#scoreGradient)" stroke-width="12"
+                            stroke-dasharray="552.92" stroke-dashoffset="552.92"
+                            stroke-linecap="round" id="score-circle"
+                            style="transition: stroke-dashoffset 1.5s ease"/>
+                    <defs>
+                        <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#10b981"/>
+                            <stop offset="50%" stop-color="#0284c7"/>
+                            <stop offset="100%" stop-color="#f59e0b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="score-ring-text">
+                    <div class="percent" id="score-percentage">0%</div>
+                    <div class="fraction" id="score-fraction">0 / 80</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-status" id="result-status">النتيجة: --</div>
+
+        <div class="result-details">
+            <div class="detail-card correct">
+                <div class="value" id="count-correct">0</div>
+                <div class="label">✅ إجابات صحيحة</div>
+            </div>
+            <div class="detail-card wrong">
+                <div class="value" id="count-wrong">0</div>
+                <div class="label">❌ إجابات خاطئة</div>
+            </div>
+            <div class="detail-card time">
+                <div class="value" id="time-taken">0:00</div>
+                <div class="label">⏱️ الوقت المستغرق</div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="window.location.reload()">🔄 إعادة الاختبار</button>
+            <button class="btn btn-secondary" onclick="window.print()">🖨️ طباعة التقرير</button>
+            <button class="btn btn-secondary" onclick="shareResult()">📤 مشاركة النتيجة</button>
+        </div>
+
+        <div class="review-list" id="review-list">
+            <!-- Detailed reviews injected here -->
+        </div>
+    </div>
+
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="confirm-modal">
+    <div class="modal">
+        <h3>⚠️ تأكيد إنهاء الاختبار</h3>
+        <p id="modal-msg">هل أنت تأكد من رغبتك في إنهاء الاختبار وتسليم الإجابات الآن؟</p>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+            <button class="btn btn-submit" onclick="submitQuiz()">نعم، إنهاء الاختبار</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ============ FLOATING FOOTER ============ -->
+<div class="persistent-footer">
+    💻 تطوير وإعداد: <span class="name">الأستاذ مصطفى علي اكر</span> - النسخة الاحترافية v1.0
+</div>
+
+<script>
+// ============================================================
+// بنك الأسئلة - 80 سؤالاً (محفوظ بالكامل دون حذف)
+// ============================================================
+const questions = [
+{q:"وقع حادث مروري أدى لتلف سيارة خدمة تابعة لجهة عامة، من هي السلطة المختصة بالنظر في تبرئة أو عدم تبرئة ذمة السائق الفني من المبالغ الناتجة عن الحادث؟",options:["مجلس الجهاز المركزي للرقابة المالية","المحكمة العمالية","وزير المالية بقرار منفرد"],correct:0},
+{q:"أنهت إحدى المؤسسات الاقتصادية العامة سنتها المالية في 31 كانون الأول، ما هي أقصى مهلة قانونية مُتاحة لها لتقديم حساباتها الختامية وموازنتها للجهاز؟",options:["خلال مدة لا تتجاوز شهراً واحداً","خلال مدة لا تتجاوز ثلاثة أشهر بعد انتهاء السنة المالية","خلال ستة أشهر من انتهاء السنة المالية"],correct:1},
+{q:"هل تخضع مديرية الصحة بإحدى المحافظات بصفتها هيئة عامة ذات طابع إداري لرقابة الجهاز المركزي للرقابة المالية؟",options:["نعم، تخضع لرقابة الجهاز كلياً","لا، تخضع لوزارة الصحة حصراً","تخضع فقط في حال وجود اختلاس مالي"],correct:0},
+{q:"تساهم الدولة بنسبة 30% في رأس مال إحدى الشركات المشتركة، ما هو الموقف القانوني لخضوع هذه الشركة لرقابة الجهاز؟",options:["تخضع لرقابة الجهاز لتجاوز مساهمة الدولة الحد الأدنى المتمثل بـ 25%","لا تخضع إلا إذا بلغت المساهمة 51%","تخضع فقط بناءً على طلب مجلس الشعب"],correct:0},
+{q:"ما هو الهدف الأساسي والجوهري من إنشاء الجهاز المركزي للرقابة المالية وفق المرسوم التشريعي 64؟",options:["تحقيق رقابة فعالة على أموال الدولة ومتابعة أداء الأجهزة التنفيذية مالياً","جباية الضرائب والرسوم للوزارات","إعداد الموازنة العامة للدولة سنوياً"],correct:0},
+{q:"صدر صك بزيادة راتب موظف في إحدى الوزارات، ما نوع الرقابة التي يمارسها الجهاز على هذا الصك قبل نفاذ آثاره؟",options:["رقابة لاحقة بعد الصرف","رقابة مسبقة من خلال التأشير على الصك","رقابة تقييم أداء فقط"],correct:1},
+{q:"قامت لجنة من الجهاز بفحص سجلات الحسابات الجارية والأمانات والسلف بوزارة، فادعت الإدارة عدم جواز ذلك. ما الحكم؟",options:["ادعاء الإدارة باطل، فللجهاز صلاحية كاملة لفحص السلف والأمانات والحسابات الجارية","تقتصر صلاحية الجهاز على موازنة الصرف فقط","يجوز فحصها بشرط إذن من القضاء"],correct:0},
+{q:"ما هي الاختصاصات المباشرة والتنفيذية للجهاز تجاه حسابات الجهات الخاضعة لرقابته؟",options:["إعادة كتابة القيود المحاسبية بنفسه","التدقيق والتفتيش وفق أحكام المرسوم","تحصيل الأرباح لحسابه الخاص"],correct:1},
+{q:"تم تعيين مفتش جديد في الجهاز المركزي، أمام من يؤدي اليمين القانونية قبل مباشرة مهامه؟",options:["أمام رئيس مجلس الوزراء","أمام رئيس الجهاز","أمام رئيس مجلس الشعب"],correct:1},
+{q:"يرغب موظف إداري في نقل خدماته من وزارة إلى الجهاز لشغل وظيفة مفتش معاون، ما الشرط الوظيفي الخباري المطلوبة؟",options:["خدمة لا تقل عن سنتين في الجهات العامة","خبرة لا تقل عن 10 سنوات","لا يشترط أي خدمة سابقة"],correct:0},
+{q:"ورد إخبار صريح وموثق للجهاز يتضمن وجود اختلاس في جهة عامة، كيف يتعامل الجهاز مع بدء التفتيش؟",options:["يبدأ التفتيش بناءً على هذا الإخبار الصريح أو بمبادرة منه أو بطلب الجهة","يرفض التدخل إلا بقرار من القضاء الإداري","يحيل الإخبار للوزير دون متابعة"],correct:0},
+{q:"ما هي الصفة والتنظيم القانوني للجهاز المركزي للرقابة المالية وعلاقته بالرئاسات؟",options:["هيئة رقابية مستقلة ترتبط برئيس مجلس الوزراء","مديرية عامة تابعة لوزارة المالية","لجنة نيابية تابعة لمجلس الشعب"],correct:0},
+{q:"عند ارتكاب أحد المفتشين المخالفات المسلكية، ما الصفة القانونية التي يتولى بها مجلس الجهاز محاكمته؟",options:["محكمة استئناف مدنية","بصفة مجلس تأديب وفق الأحكام القانونية","محكمة قضاء إداري"],correct:1},
+{q:"كيف تظهر موازنة الجهاز المركزي للرقابة المالية ضمن الموازنة العامة للدولة؟",options:["تدمج ضمن موازنة وزارة المالية","خصص لها فصل مستقل في الموازنة العامة للدولة","تعتمد على التبرعات والمنح فقط"],correct:1},
+{q:"أبرمت الدولة عقداً للحصول على تسهيلات ائتمانية أجنبية، ما دور الجهاز في فحص هذا العقد؟",options:["فحص توريد أصل القرض وفوائده وسداد الدولة عند الاقتراض والإقراض","الموافقة على الشروط السياسية للقرض","صرف أموال القرض مباشرة للشركات"],correct:0},
+{q:"ما هو المستند المرجعي الذي يحدد نطاق وأعمال الإدارات الفنية وفروع الجهاز بالمحافظات؟",options:["القانون والنظام الداخلي وخطة العمل السنوية","التعليمات الشفهية للوزراء","قرارات البلديات المحتصة"],correct:0},
+{q:"تقرر نقل أحد المفتشين الفنيين من الجهاز إلى جهة حكومية أخرى، ما هي الآلية الأصولية للقرار؟",options:["بقرار من السلطة المختصة بناءً على اقتراح مجلس الجهاز","بطلب شخصي من المفتش فقط","بقرار من مدير الفرع بالمحافظة"],correct:0},
+{q:"أتم المفتش المعاون مهلته التدريبية وتقدم للاختبار العام ولكنه لم ينجح، ما هو الأثر القانوني؟",options:["يفصل فوراً من الخدمة","يعاد اختباره بعد سنة وفق النص القانوني","يعين وزيراً حكماً"],correct:1},
+{q:"ما هو المستوى الوظيفي الاشتراطي المعتمد لشغل بعض وظائف الوكلاء والمديرين الفنيين بالجهاز؟",options:["مستوى مفتش أول وفق الأحكام","مستوى مفتش معاون حديث التعيين","لا يتطلب أي مرتبة فنية"],correct:0},
+{q:"من هو الموظف الذي يمارس صلاحية (آمر الصرف) في الموازنة الخاصة بالجهاز المركزي؟",options:["وزير المالية","رئيس الجهاز","رئيس مجلس الشعب"],correct:1},
+{q:"كشفت الرقابة اللاحقة حالة إهمال تسببت بضرر مالي، هل يملك الجهاز صلاحية التحقيق المباشر؟",options:["نعم، يملك صلاحية التحقيق في الإهمال والمخالفات المالية ضمن اختصاصه","لا، التحقيق محصور بالشرطة حصراً","تقتصر صلاحيته على التنبيه الشفهي"],correct:0},
+{q:"صدر صك ترفيع دوري لموظفي إحدى الجهات، ما هي طبيعة رقابة الجهاز المطبقة عليه؟",options:["رقابة مسبقة قبل صدور الصك","رقابة لاحقة ضمن المدة المحددة قانوناً (سنة)","لا يخضع لأي نوع من الرقابة"],correct:1},
+{q:"اكتشفت الإدارة دفع مبالغ غير مستحقة لأحد المقاولين خلافاً للقانون، ما الواجب القانوني الفوري عليها؟",options:["استرداد الأموال المدفوعة وفق الإجراءات وفي المدة المحددة","اعتبار المبلغ هبة وإغلاق الملف","انتظار مرور 10 سنوات لمطالبته"],correct:0},
+{q:"تقدم شخص لشغل وظيفة مفتش في الجهاز، وكان قد فرضت بحقه عقوبة مسلكية جسيمة سابقة، ما الموقف؟",options:["يعد ذلك مانعاً من شغل الوظائف الفنية بالجهاز","يعين بشرط حسم 10% من راتبه","يستثنى إذا كان يحمل شهادة دكتوراه"],correct:0},
+{q:"من هي الجهة المختصة بإقرار مشروع التقرير العام عن الحساب الإجمالي للموازنة العامة؟",options:["المجلس الأعلى للجهاز","مجلس إدارة البنك المركزي","جمعية المحاسبين القانونيين"],correct:0},
+{q:"وجه الجهاز كتاب ملاحظات لمديرية مالية حول خطأ في التثبيت، ما المهلة العامة المحددة لإبلاغه بإجراءات التصحيح؟",options:["أسبوع واحد فقط","شهر من تاريخ ورود الملاحظات","سنة كاملة من تاريخ الخلل"],correct:1},
+{q:"من هو المرجع المختص بتسمية المديرين الثلاثة الفنيين كأعضاء في مجلس الجهاز؟",options:["رئيس الجهاز","رئيس الجمهورية","وزير العدل"],correct:0},
+{q:"تلقت جمعية نفع عام إعانة مالية من الموازنة العامة للدولة، هل تخضع لرقابة الجهاز؟",options:["نعم، تخضع لرقابته في حدود الإعانات والأموال التي تلقتها من الدولة","لا تخضع إطلاقاً لأنها غير حكومية","تخضع لرقابة وزارة الخارجية فقط"],correct:0},
+{q:"ما الهدف الأساسي للجهاز عند مراجعة وفحص الحسابات الختامية للشركات العامة الاقتصادية؟",options:["التعرف على حقيقة المركز المالي ومدى سلامة تطبيق المبادئ المحاسبية","فرض الضرائب المباشرة على الأرباح","تقييم العمال ونقلهم"],correct:0},
+{q:"صدر صك تعيين لموظف في جهة عامة خاضعة، ما هي المهلة المحددة للجهاز لمراجعة هذا الصك والتأشير عليه؟",options:["شهر من تاريخ صدوره","سنة من تاريخ المباشرة","خمس سنوات من الصدور"],correct:0},
+{q:"تمت ملاحقة مفتش قضائياً من قبل مدير عام بسبب تقرير رقابي كشف مخالفات، دون وجود غش من المفتش. ما موقف القانون؟",options:["تمتعه بالحماية الخاصة ولا يجوز ملاحقته قضائياً فيما يخص عمله إلا في حالتي الغش والتدليس","يجوز سجنه فوراً بناء على شكوى المدير","يلغى تقرير المفتش حكماً"],correct:0},
+{q:"ما هي الأداة التشريعية والصك القانوني المحدد لتعيين رئيس الجهاز المركزي للرقابة المالية؟",options:["بمرسوم","بقرار من وزير المالية","بقرار من رئيس مجلس الشعب"],correct:0},
+{q:"ما هو المؤهل العلمي الأدنى والشرطي المعتمد قانوناً لشغل الوظائف الفنية بالجهاز؟",options:["إجازة جامعية في القانون أو الاقتصاد أو التجارة أو ما يعادلها","شهادة الثانوية العامة","شهادة معهد متوسط تجاري فقط"],correct:0},
+{q:"من يملك الصلاحية القانونية لتسمية وكلاء الجهاز المركزي للرقابة المالية؟",options:["رئيس مجلس الوزراء بناءً على اقتراح رئيس الجهاز","وزير المالية بقرار منفرد","المجلس الأعلى للقضاء"],correct:0},
+{q:"أظهرت الحاجة إحداث فرع جديد للجهاز في إحدى المحافظات، من يملك صلاحية اقتراح هذا الإحداث؟",options:["المجلس الأعلى للجهاز","محافظ المحافظة","مدير الأوقاف"],correct:0},
+{q:"أثناء الرقابة على المستودعات والمخازن العامة، ما هو الواجب الجوهري الذي يتحقق منه المفتش؟",options:["مطابقة الموجود الفعلي مع الموجود الدفتري وأسباب التلف والتكدس","شراء مستلزمات جديدة للمستودع","دهان جدران المستودع"],correct:0},
+{q:"أمضى المفتش مدة 6 سنوات في وظيفته بكفاءة وتقارير حسنة، ما هي الترقية الفنية المستحقة له؟",options:["يرقى إلى مرتبة (مفتش أول)","يعين وكيلاً للجهاز فوراً","ينقل إلى وظيفة إدارية خارج الجهاز"],correct:0},
+{q:"غاب رئيس الجهاز المركزي عن مكتبه بداعي السفر الرسمي، من ينوب عنه قانوناً في صلاحياته المباشرة؟",options:["وكيل الجهاز الأقدم","معاون وزير المالية","أكبر المديرين سناً"],correct:0},
+{q:"تأخرت إحدى الوزارات عن الرد على ملاحظات الجهاز لمدة ثلاثة أشهر بغير عذر مشروع، كيف تُصنف هذه الحالة؟",options:["مخالفة مالية مستقلة تستوجب المساءلة والتحقيق","تصرف إداري عادي لا يستوجب الإجراء","تؤدي لإلغاء الملاحظات تلقائياً"],correct:0},
+{q:"من يتولى مهمة تسمية أمين سر مجلس الجهاز المركزي من بين العاملين الفنيين؟",options:["رئيس الجهاز","رئيس مجلس الدولة","مدير الإدارة المالية"],correct:0},
+{q:"ما نوع الرقابة التي يمارسها الجهاز المركزي على صرف حسابات المعاشات والتعويضات والإعانات؟",options:["رقابة مسبقة قبل عملية الصرف","رقابة لاحقة بعد 5 سنوات","رقابة اختيارية بحسب الرغبة"],correct:0},
+{q:"من هو الموظف الذي يتولى بحكم القانون رئاسة جلسات المجلس الأعلى للجهاز؟",options:["رئيس الجهاز","وزير الاقتصاد","نائب رئيس مجلس الوزراء"],correct:0},
+{q:"رغب رئيس الجهاز في تفويض بعض من صلاحياته الإدارية والفنية لتسهيل العمل، لمن يحق له تفويضها؟",options:["لوكالاء الجهاز وفق الأحكام والقواعد النافذة","لأي موظف بالدولة","لرؤساء البلديات"],correct:0},
+{q:"لمن يُرفع التقرير السنوي العام الشامل الذي أعده الجهاز عن نتائج أعماله ورقابته السنوية؟",options:["إلى رئيس الجمهورية، وإلى مجلس الشعب، وإلى رئيس مجلس الوزراء","إلى البنك الدولي حصراً","إلى وسائل الإعلام العامة فقط"],correct:0},
+{q:"ما هي المرتبة والصفة الاعتبارية والمالية المقررة قانوناً لرئيس الجهاز المركزي للرقابة المالية؟",options:["يُعامل معاملة الوزير من حيث الراتب والتعويضات والحقوق","يُعامل معاملة مدير عام فقط","يُعامل معاملة أستاذ جامعي"],correct:0},
+{q:"بالإضافة لرئيس الجهاز ووكلائه والمديرين الثلاثة، من يشارك رسمياً في عضوية مجلس الجهاز؟",options:["نائب رئيس مجلس الدولة، ومعاون وزير المالية","وزير التجارة الداخلية وحاكم المصرف","نقيب المحامين ونقيب المهندسين"],correct:0},
+{q:"اكتشف مفتشو الجهاز جرم التزوير واختلاس المبالغ أثناء مراجعة دفاتر إحدى المؤسسات، ما هو الإجراء الواجب؟",options:["تحريك الدعوى العامة وإحالة الملف مباشرة للقضاء المختص وإعلام جهته","إغلاق السجلات والتكتم على الأمر","فرض غرامة مالية لصالح المفتش"],correct:0},
+{q:"رفض الجهاز التأشير على صك صرف لمشروع، وأصرت الجهة الإدارية على تنفيذه. لمن يُرفع الخلاف للبت النهائي؟",options:["يُعرض الخلاف على رئيس مجلس الوزراء للبت فيه وتتحمل الجهة مسؤولية القرار","يُعرض على المحكمة الجنائية الدولية","يُنفذ الصك فوراً دون أي مرجع"],correct:0},
+{q:"امتنعت مديرية عامة عن إبراز القيود والسجلات للمفتش بحجة أنها أسرار دولة، ما هو الحكم القانوني؟",options:["لا يحق لها الامتناع، ويعد الامتناع أو الإخفاء مخالفة مالية ومسلكية تستوجب المساءلة","يحق لها الامتناع حماية للسرية","يُكتفى بأخذ تعهد شفهي منهم"],correct:0},
+{q:"هل تخضع مجالس المدن والبلدات والبلديات (الوحدات الإدارية المحلية) لرقابة الجهاز المركزي؟",options:["نعم، تخضع جميع الوحدات الإدارية والمحلية لرقابة الجهاز","لا، تخضع لرقابة وزارة المحافظات حصراً","تخضع فقط في المشاريع التي تتجاوز المليار"],correct:0},
+{q:"أراد أحد المفتشين الفنيين بالجهاز فتح مكتب محاسبة خاص بعد ساعات الدوام، ما الموقف القانوني؟",options:["يُحظر عليه الجمع بين وظيفته وأي عمل تجاري أو مهنة حرة أو عمل متعارض","يجوز له ذلك بشرط موافقة المدير المباشر","يجوز له ذلك في أيام العطل الرسمية فقط"],correct:0},
+{q:"ما هو الالتزام القانوني والأخلاقي الأهم المفروض على مفتشي الجهاز تجاه المعطيات التي يطلعون عليها؟",options:["الالتزام التام بكتمان السر المهني وعدم إفشاء المعلومات","نشر البيانات على مواقع التواصل الاجتماعي","بيع الوثائق للشركات المنافسة"],correct:0},
+{q:"وصلت معلومات عن وجود نقص في صندوق إحدى الخزائن، هل يملك الجهاز صلاحية الجرد المفاجئ؟",options:["نعم، يملك صلاحية إجراء التفتيش والجرد المفاجئ على الصناديق والمستودعات بأي وقت","لا، يتوجب إبلاغ الخزينة قبل شهر من الزيارة","يتطلب موافقة من وزارة العدل أولاً"],correct:0},
+{q:"واجه المفتش مسألة هندسية وتقنية معقدة أثناء تدقيق مشروع إنشاء جصر، ماذا يجوز للجهاز؟",options:["يجوز له الاستعانة بالخبراء والفنيين والمهندسين من خارج كادره الفني","يلغى المشروع فوراً لعدم المعرفة","يعتمد على التخمين الفردي للمفتش"],correct:0},
+{q:"تم صرف مبلغ بموجب صك يخضع للرقابة المسبقة دون عرضه على الجهاز وتأشيره. من يتحمل المسؤولية المالية؟",options:["يتحمل آمر الصرف والمصفي والمحاسب المسؤولية المالية عن المبالغ المصروفة","يتحمل المفتش المسؤولية","تسقط المسؤولية عن الجميع وتتحملها الخزينة"],correct:0},
+{q:"أجرت وزارة مناقصة عامة لتوريد تجهيزات، ما هو دور الجهاز المركزي في هذه العملية؟",options:["التأكد من سلامة الإجراءات ومطابقتها لقانون العقود الموحد والأنظمة النافذة","تحديد أسعار البضائع المباعة في السوق","الشراء المباشر للبضائع لحسابه"],correct:0},
+{q:"اكتشف الجهاز وجود خلل وتراخٍ شديد في جباية الرسوم المستحقة لجهة عامة، ما هو الإجراء المترتب؟",options:["يطالب بتدارك النقص ويحقق في أسباب التقصير أو الإهمال لتحديد المسؤوليات","يتجاهل الأمر لكونه يخص الرسوم","يقوم المفتش بجباية الأموال بنفسه"],correct:0},
+{q:"ما المقصود بـ (رقابة المشروعية) التي يمارسها الجهاز المركزي للرقابة المالية على الجهات العامة؟",options:["التأكد من مطابقة جميع التصرفات المالية والإدارية ذات الأثر المالي للقوانين والمراسيم","مراقبة سلوك الموظفين الشخصي في منازلهم","إعطاء الموظفين مكافآت إنتاجية"],correct:0},
+{q:"هل تخضع حسابات البعثات الدبلوماسية والسفارات والقنصليات السورية في الخارج لرقابة الجهاز؟",options:["نعم، تخضع لرقابة الجهاز لكونها جزءاً من الجهات العامة ذات الطابع الإداري","لا، تخضع لرقابة الدولة المستضيفة فقط","تخضع لرقابة منظمة الأمم المتحدة"],correct:0},
+{q:"ارتكب موظف فني بالجهاز مخالفة مسلكية خطيرة، من يملك الصلاحية القانونية لإصدار قرار كف يده عن العمل؟",options:["رئيس الجهاز المركزي للرقابة المالية","مدير الناحية","رئيس غرفة التجارة"],correct:0},
+{q:"قام الجهاز بتقييم أداء إحدى الشركات العامة من حيث مدى تحقيق الأهداف ونسب الأرباح، ما نوع هذه الرقابة؟",options:["رقابة الأداء والفعالية والاقتصاد","رقابة انضباط مسلكي شفهي","رقابة قضائية جائية"],correct:0},
+{q:"صدر صك تعيين جديد، متى يصبح هذا الصك نافذاً ومقبولاً للتنفيذ المالي؟",options:["بعد عرضه على الجهاز للرقابة المسبقة والتأشير عليه ضمن المهلة","بمجرد توقيع الموظف عليه","بعد مضي خمس سنوات على صدوره"],correct:0},
+{q:"إذا أصدر رئيس مجلس الوزراء قراراً بتنفيذ صك رفض الجهاز التأشير عليه، من يتحمل المسؤولية المالية؟",options:["تتحمل الجهة المصدرة للقرار كامل المسؤولية ويُوثق ذلك في تقرير الجهاز","يتحمل الجهاز المركزي المسؤولية","تُلغى جميع المسؤوليات"],correct:0},
+{q:"كيف يتم تعيين المفتش المعاون في بداية التحاقه بالخدمة بالجهاز المركزي؟",options:["عن طريق مسابقة لمدة ثلاث سنوات وفق الأحكام","بتعيين مباشر دون مسابقة","بقرار من مدير الفرع ب المحافظة"],correct:0},
+{q:"ما هو الوضع المباشر للمفتش المعاون بعد نجاحه في الاختبار العام المخصص له؟",options:["يصبح مفتشاً أصيلاً","ينقل خارج الجهاز حكماً","يعاد تكليفه بمسابقة جديدة"],correct:0},
+{q:"هل يجوز نقل العاملين الفنيين من الوظائف الفنية إلى وظائف غير فنية داخل الجهاز وخارجه؟",options:["نعم، بقرار من السلطة المختصة بناءً على اقتراح المجلس","لا يجوز مطلقاً تحت أي ظرف","يجوز فقط بطلب من المحكمة العمالية"],correct:0},
+{q:"ما هي الغاية الجوهرية والأساسية من فرض الرقابة المسبقة على صكوك العاملين والنفقات؟",options:["منع وقوع المخالفة قبل نفاذ آثار الصك أو إجراء الصرف","تأخير صرف مرتبات العاملين","زيادة الأوراق والمستندات في الإدارة"],correct:0},
+{q:"شركة تساهم فيها الدولة بنسبة 15% فقط، هل تخضع لرقابة الجهاز بموجب النص العادي للنسبة؟",options:["لا تخضع لأن نسبة المساهمة أقل من الحد الأدنى (25%)","تخضع كلياً وبشكل حتمي","تخضع فقط في سنوات الخسارة"],correct:0},
+{q:"ما هي الوثيقة السنوية التي يقرها المجلس لتحديد مسار التفتيش والعمل في المركز والفروع؟",options:["مشروع خطة العمل السنوية للجهاز","قانون العقود الموحد","جدول الترفيعات النصف سنوي"],correct:0},
+{q:"عند فحص قيود الحسابات الجارية والسلف في نهاية السنة المالية، ما هو الإجراء الواجب على المفتش؟",options:["التأكد من تسويتها وإغلاقها وعدم تدويرها بغير حق قانوني","زيادة قيمتها للضعف","تحويلها لحساب المفتش الشخصي"],correct:0},
+{q:"أحيل عامل فني في الجهاز إلى مجلس التأديب، ما هي الضمانة التي يكفلها له النص؟",options:["مكفول بأحكام وحماية خاصة وحق الدفاع وفق النص","يحاكم بغياب محاميه حكماً","يحرم من المعاش التقاعدي فوراً"],correct:0},
+{q:"استعان الجهاز بمهندس استشاري خارجي للتحقق من جودة مشروع تعبيد طريق، ما الصفة القانونية لهذا الإجراء؟",options:["إجراء قانوني صحيح ومكفول بالمرسوم للاستعانة بالخبراء","إجراء باطل ويعد إفشاءً للسرية","يقتصر الاستعانة على الأطباء فقط"],correct:0},
+{q:"تلقت وزارة منحة مالية أجنبية لتجهيز مدارس، ما هو نطاق رقابة الجهاز على هذه المنحة؟",options:["مراجعتها وفحص سلامة التصرف بها وفق القواعد والأنظمة","لا يحق للجهاز التدخل بالمنح الخارجية","تخضع لرقابة منظمة الصحة فقط"],correct:0},
+{q:"ما هو الأثر المترتب على امتناع محاسب جهة عامة عن تقديم دفاتر التحصيل للمفتش؟",options:["اعتبار الامتناع مخالفة مالية ومسلكية تستوجب التحقيق والعقاب","إعفاء المحاسب من الرقابة","منح المحاسب مكافأة تشجيعية"],correct:0},
+{q:"وقعت كارثة طبيعية أدت لتلف مواد بالمستودع بغير خطأ من الموظف الفني، من ينظر في تبرئة ذمته؟",options:["مجلس الجهاز المركزي للرقابة المالية","المحافظ بقرار إداري","رئيس النقابة المهنية"],correct:0},
+{q:"ما هي الآلية التي يتبعها الجهاز لتقييم الأداء الاقتصادي للشركات العامة ذات الطابع الاقتصادي؟",options:["مراجعة الحسابات الختامية والميزانيات وقياس نسبة الأرباح والخسائر المخططة","عد العمال الحاضرين يومياً","مراقبة أسعار المنتجات في المستهلك"],correct:0},
+{q:"تسببت جهة عامة بضياع مبالغ على الخزينة نتيجة عدم جباية الغرامات في وقتها، ما هي مطالبات الجهاز؟",options:["مطالبة الجهة باسترداد الأموال وتدارك النقص وتحسيس المسؤولية","إلغاء الغرامات نهائياً","تحميل المبلغ للجمهور"],correct:0},
+{q:"صدر صك ترفيع دوري لموظف ومرت عليه سنة كاملة دون التأشير عليه، ما وضع المراجعة اللاحقة له؟",options:["تنتهي مهلة المراجعة اللاحقة بمرور سنة من تاريخ صدوره","يبقى قابلاً للمراجعة لمدة 50 سنة","يلغى صك الترفيع تلقائياً"],correct:0},
+{q:"كيف يتم إحداث وتحديد نطاق عمل فروع الجهاز المركزي للرقابة المالية في المحافظات؟",options:["بقرار بناءً على اقتراح المجلس الأعلى للجهاز","بقرار من اتحاد العمال","بمرسوم من وزارة الداخلية"],correct:0},
+{q:"ما هي السلطة والجهة المباشرة التي ترتبط بها الهيئة الرقابية للجهاز المركزي للرقابة المالية؟",options:["ترتبط برئيس مجلس الوزراء","ترتبط بوزارة المالية","ترتبط بالبنك المركزي"],correct:0}
+];
+
+// ============================================================
+// STATE MANAGEMENT
+// ============================================================
+let currentQuestion = 0;
+let userAnswers = new Array(questions.length).fill(null);
+let timerInterval = null;
+let timeLeft = 48 * 60; // 48 minutes
+let startTime = null;
+let streak = 0;
+let maxStreak = 0;
+const prefixes = ['أ', 'ب', 'ج'];
+
+// ============================================================
+// INITIALIZATION & LOGIN
+// ============================================================
+function checkPassword() {
+    const inputVal = document.getElementById('pass-input').value.trim();
+    const errorEl = document.getElementById('pass-error');
+
+    // كلمة المرور المطلوبة 20262026
+    if (inputVal === '20262026') {
+        document.getElementById('password-screen').style.display = 'none';
+        document.getElementById('quiz-container').style.display = 'block';
+        initQuiz();
+        showToast('🎉 مرحباً بك! بدأ الامتحان', 'success');
+    } else {
+        errorEl.style.display = 'block';
+        errorEl.style.animation = 'none';
+        setTimeout(() => errorEl.style.animation = 'shake 0.5s', 10);
+        showToast('❌ كلمة السر غير صحيحة', 'error');
+    }
+}
+
+function initQuiz() {
+    renderNavGrid();
+    loadQuestion(0);
+    startTimer();
+    startTime = Date.now();
+    updateStats();
+}
+
+function renderNavGrid() {
+    const navGrid = document.getElementById('nav-grid');
+    navGrid.innerHTML = '';
+    questions.forEach((_, idx) => {
+        const btn = document.createElement('div');
+        btn.className = `nav-grid-item ${idx === 0 ? 'active' : ''}`;
+        btn.id = `nav-item-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => goToQuestion(idx);
+        navGrid.appendChild(btn);
+    });
+}
+
+function loadQuestion(index) {
+    currentQuestion = index;
+    const q = questions[index];
+
+    document.getElementById('q-number').textContent = `سؤال ${index + 1} من ${questions.length}`;
+    document.getElementById('q-text').textContent = q.q;
+
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[index] === optIdx;
+        const optionDiv = document.createElement('div');
+        optionDiv.className = `option-item ${isSelected ? 'selected' : ''}`;
+        optionDiv.onclick = () => selectOption(optIdx);
+        optionDiv.innerHTML = `
+            <span class="option-prefix">${prefixes[optIdx]}</span>
+            <span class="option-label">${optText}</span>
+        `;
+        optionsContainer.appendChild(optionDiv);
+    });
+
+    updateProgress();
+    updateStats();
+
+    document.getElementById('btn-prev').disabled = index === 0;
+    document.getElementById('btn-next').textContent = 
+        index === questions.length - 1 ? '🏁 النهاية' : 'التالي ➡️';
+
+    document.querySelectorAll('.nav-grid-item').forEach((item, idx) => {
+        item.classList.toggle('active', idx === index);
+    });
+}
+
+function selectOption(optIdx) {
+    userAnswers[currentQuestion] = optIdx;
+    
+    // التحديث البصري للخيارات
+    const optionsContainer = document.getElementById('options-container');
+    const items = optionsContainer.children;
+    for (let i = 0; i < items.length; i++) {
+        items[i].classList.toggle('selected', i === optIdx);
+    }
+
+    // تحديث الخريطة الإرشادية
+    const navItem = document.getElementById(`nav-item-${currentQuestion}`);
+    if (navItem) {
+        navItem.classList.add('answered');
+    }
+
+    updateProgress();
+    updateStats();
+}
+
+function nextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        loadQuestion(currentQuestion + 1);
+    } else {
+        confirmSubmit();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        loadQuestion(currentQuestion - 1);
+    }
+}
+
+function goToQuestion(index) {
+    loadQuestion(index);
+}
+
+// ============================================================
+// STATS & PROGRESS
+// ============================================================
+function updateProgress() {
+    const answeredCount = userAnswers.filter(a => a !== null).length;
+    const progressPercent = (answeredCount / questions.length) * 100;
+    document.getElementById('progress-top').style.width = `${progressPercent}%`;
+}
+
+function updateStats() {
+    const answeredCount = userAnswers.filter(a => a !== null).length;
+    let correctCount = 0;
+    let currentStreak = 0;
+    let maxS = 0;
+
+    userAnswers.forEach((ans, idx) => {
+        if (ans !== null) {
+            if (ans === questions[idx].correct) {
+                correctCount++;
+                currentStreak++;
+                if (currentStreak > maxS) maxS = currentStreak;
+            } else {
+                currentStreak = 0;
+            }
+        }
+    });
+
+    streak = currentStreak;
+    maxStreak = Math.max(maxStreak, maxS);
+
+    const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+    const xp = (correctCount * 10) + (maxStreak * 5);
+
+    document.getElementById('stat-answered').textContent = answeredCount;
+    document.getElementById('stat-accuracy').textContent = `${accuracy}%`;
+    document.getElementById('stat-streak').textContent = streak;
+    document.getElementById('stat-xp').textContent = xp;
+}
+
+// ============================================================
+// TIMER CONTROL
+// ============================================================
+function startTimer() {
+    const timerDisplay = document.getElementById('timer');
+    const timerCard = document.getElementById('timer-card');
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerDisplay.textContent = "00:00";
+            showToast('⏱️ انتهى الوقت المخصص للامتحان!', 'error');
+            submitQuiz();
+            return;
+        }
+
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (timeLeft <= 300) { // 5 minutes left
+            timerCard.className = 'timer-card danger';
+        } else if (timeLeft <= 600) { // 10 minutes left
+            timerCard.className = 'timer-card warning';
+        }
+    }, 1000);
+}
+
+// ============================================================
+// THEME & MODAL & TOAST
+// ============================================================
+function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        document.getElementById('theme-btn').textContent = '🌙';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-btn').textContent = '☀️';
+    }
+}
+
+function confirmSubmit() {
+    const answeredCount = userAnswers.filter(a => a !== null).length;
+    const unAnswered = questions.length - answeredCount;
+    const modalMsg = document.getElementById('modal-msg');
+    
+    if (unAnswered > 0) {
+        modalMsg.textContent = `ملاحظة: يوجد لديك (${unAnswered}) سؤال لم تجب عليه بعد. هل أنت تأكد من الإنهاء؟`;
+    } else {
+        modalMsg.textContent = 'لقد أجبت عن جميع الأسئلة. هل ترغب في إنهاء الاختبار وتسليم الإجابات الآن؟';
+    }
+    
+    document.getElementById('confirm-modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('confirm-modal').classList.remove('active');
+}
+
+function showToast(msg, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// ============================================================
+// SUBMISSION & RESULTS
+// ============================================================
+function submitQuiz() {
+    closeModal();
+    clearInterval(timerInterval);
+
+    let correctCount = 0;
+    userAnswers.forEach((ans, idx) => {
+        if (ans === questions[idx].correct) {
+            correctCount++;
+        }
+    });
+
+    const totalQuestions = questions.length;
+    const scorePercent = Math.round((correctCount / totalQuestions) * 100);
+    const elapsedSeconds = Math.max(1, Math.floor((Date.now() - startTime) / 1000));
+    const elapsedMins = Math.floor(elapsedSeconds / 60);
+    const elapsedSecs = elapsedSeconds % 60;
+    const formattedTime = `${elapsedMins}:${elapsedSecs.toString().padStart(2, '0')}`;
+
+    // إخفاء الامتحان وإظهار شاشة النتائج
+    document.getElementById('quiz-container').style.display = 'none';
+    const resultView = document.getElementById('result-view');
+    resultView.style.display = 'block';
+
+    // تعبئة البيانات
+    document.getElementById('score-percentage').textContent = `${scorePercent}%`;
+    document.getElementById('score-fraction').textContent = `${correctCount} / ${totalQuestions}`;
+    document.getElementById('count-correct').textContent = correctCount;
+    document.getElementById('count-wrong').textContent = totalQuestions - correctCount;
+    document.getElementById('time-taken').textContent = formattedTime;
+
+    // دائرة النسبة المئوية
+    const circle = document.getElementById('score-circle');
+    const circumference = 2 * Math.PI * 88; // ~552.92
+    const offset = circumference - (circumference * scorePercent / 100);
+    setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+    }, 200);
+
+    // حالة النتيجة
+    const statusEl = document.getElementById('result-status');
+    if (scorePercent >= 60) {
+        statusEl.className = 'result-status status-pass';
+        statusEl.textContent = '🎉 ناجح - مبارك التميز!';
+        triggerConfetti();
+    } else {
+        statusEl.className = 'result-status status-fail';
+        statusEl.textContent = '❌ لم تجتز الاختبار - حاول مرة أخرى';
+    }
+
+    // بناء قائمة المراجعة التفصيلية
+    renderReviewList();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderReviewList() {
+    const reviewList = document.getElementById('review-list');
+    reviewList.innerHTML = '<h3 style="margin-bottom:15px; color:var(--primary-accent);">📋 المراجعة التفصيلية للإجابات:</h3>';
+
+    questions.forEach((q, idx) => {
+        const userAns = userAnswers[idx];
+        const isCorrect = userAns === q.correct;
+        const item = document.createElement('div');
+        item.className = `review-item ${isCorrect ? 'correct' : 'wrong'}`;
+
+        let userAnsText = userAns !== null ? q.options[userAns] : 'لم يتم الإجابة';
+        let correctAnsText = q.options[q.correct];
+
+        item.innerHTML = `
+            <div class="review-q">س${idx + 1}: ${q.q}</div>
+            <div class="review-a" style="color:${isCorrect ? 'var(--success)' : 'var(--danger)'};">
+                إجابتك: ${userAnsText} ${isCorrect ? '✅' : '❌'}
+            </div>
+            ${!isCorrect ? `<div class="correct-ans">💡 الإجابة الصحيحة: ${correctAnsText}</div>` : ''}
+        `;
+        reviewList.appendChild(item);
+    });
+}
+
+function triggerConfetti() {
+    const colors = ['#f59e0b', '#10b981', '#0284c7', '#ef4444', '#8b5cf6'];
+    for (let i = 0; i < 70; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+
+function shareResult() {
+    const scoreText = document.getElementById('score-percentage').textContent;
+    const text = `📜 لقد أتممت اختبار قانون الجهاز المركزي للرقابة المالية v1.0 وحصلت على نتيجة: ${scoreText}!`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'نتيجة اختبار قانون الجهاز المركزي',
+            text: text,
+            url: window.location.href
+        }).catch(() => {});
+    } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        showToast('📋 تم نسخ النتيجة للحافظة بنجاح!', 'success');
+    } else {
+        showToast('📤 النتيجة: ' + text, 'info');
+    }
+}
+</script>
+</body>
+</html>
